@@ -1,5 +1,7 @@
 var parse = require("./parseInput.js").parseNewlineInput;
 console.log("Day 1");
+day1Part1();
+day1Part2();
 
 function calculateFuel(mass) {
     let temp = Math.floor(mass / 3);
@@ -11,13 +13,11 @@ function day1Part1() {
     let shipModules = parse("day1");
     //console.log(shipModules);
     let sum = 0;
-    for(var i in shipModules) {
+    for (var i in shipModules) {
         sum += calculateFuel(Number(shipModules[i]));
     }
     console.log("Part1:", sum);
 }
-
-day1Part1();
 
 
 function calculateRequiredFuel(startingMass) {
@@ -27,7 +27,7 @@ function calculateRequiredFuel(startingMass) {
     do {
         mass += additionalFuel;
         additionalFuel = calculateFuel(additionalFuel);
-    } while(additionalFuel > 0);
+    } while (additionalFuel > 0);
     //console.log(startingMass, mass);
     return mass;
 }
@@ -36,10 +36,8 @@ function day1Part2() {
     let shipModules = parse("day1");
     //console.log(shipModules);
     let sum = 0;
-    for(var i in shipModules) {
+    for (var i in shipModules) {
         sum += calculateRequiredFuel(Number(shipModules[i]));
     }
     console.log("Part2:", sum);
 }
-
-day1Part2();

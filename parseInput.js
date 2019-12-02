@@ -6,9 +6,15 @@ function getPath(fileName) {
 }
 
 function readFile(fileName) {
-    return fs.readFileSync(getPath(fileName), { encoding: 'utf8' });
+    return fs.readFileSync(getPath(fileName), {
+        encoding: 'utf8'
+    });
 }
 
-exports.parseNewlineInput = function(fileName) {
+exports.parseNewlineInput = function (fileName) {
     return readFile(fileName).split("\r\n");
+}
+
+exports.parseCommaInput = function (fileName) {
+    return readFile(fileName).split(",");
 }

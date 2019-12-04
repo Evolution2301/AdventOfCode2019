@@ -11,6 +11,10 @@ function readFile(fileName) {
     });
 }
 
+exports.readFileInput = function(fileName) {
+    return readFile(fileName);
+}
+
 exports.parseNewlineInput = function (newlineInput) {
     return newlineInput.split("\r\n");
 }

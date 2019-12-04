@@ -1,4 +1,4 @@
-var parse = require("./parseInput.js").parseNewlineInput;
+var parse = require("./parseInput.js").parseNewlineInputFile;
 console.log("Day 1");
 day1Part1();
 day1Part2();

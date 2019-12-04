@@ -11,10 +11,18 @@ function readFile(fileName) {
     });
 }
 
-exports.parseNewlineInput = function (fileName) {
+exports.parseNewlineInput = function (newlineInput) {
+    return newlineInput.split("\r\n");
+}
+
+exports.parseNewlineInputFile = function (fileName) {
     return readFile(fileName).split("\r\n");
 }
 
-exports.parseCommaInput = function (fileName) {
+exports.parseCommaInput = function (commaInput) {
+    return commaInput.split(",");
+}
+
+exports.parseCommaInputFile = function (fileName) {
     return readFile(fileName).split(",");
 }

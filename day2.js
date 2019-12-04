@@ -1,4 +1,4 @@
-var parse = require("./parseInput.js").parseCommaInput;
+var parse = require("./parseInput.js").parseCommaInputFile;
 console.log("Day 2");
 part1();
 part2();

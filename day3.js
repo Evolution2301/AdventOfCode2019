@@ -12,14 +12,14 @@ function part1() {
     }
     //console.log(wires);
 
+    let wire1Set = new Set(wires[1]);
     let crossings = [];
     for (let i in wires[0]) {
-        let found = wires[1].find(val => positionsIdentical(val, wires[0][i]));
-        if (found !== undefined) {
-            //console.log("Crossing:", found);
-            crossings.push(found);
+        if (wire1Set.has(wires[0][i]) && wires[0][i] != '0,0') {
+            crossings.push(wires[0][i]);
         }
     }
+    //console.log("Crossings:", crossings);
 
     let minManhattanDistance = 0;
     for (let i in crossings) {
@@ -40,14 +40,14 @@ function part2() {
     }
     //console.log(wires);
 
+    let wire1Set = new Set(wires[1]);
     let crossings = [];
     for (let i in wires[0]) {
-        let found = wires[1].find(val => positionsIdentical(val, wires[0][i]));
-        if (found !== undefined) {
-            //console.log("Crossing:", found);
-            crossings.push(found);
+        if (wire1Set.has(wires[0][i]) && wires[0][i] != '0,0') {
+            crossings.push(wires[0][i]);
         }
     }
+    //console.log("Crossings:", crossings);
 
     let minSteps = 0;
     for (let i in crossings) {
@@ -57,18 +57,20 @@ function part2() {
         if (minSteps == 0 || minSteps > steps) {
             minSteps = steps;
         }
+        //console.log(crossings[i], steps0, steps1, steps, minSteps);
     }
 
-    console.log("Part2:");
+    console.log("Part2:", minSteps);
 }
 
 function calculateManhattanDistance(position) {
-    return Math.abs(position[0]) + Math.abs(position[1]);
+    let coords = position.split(',');
+    return Math.abs(coords[0]) + Math.abs(coords[1]);
 }
 
 function calculateWirePositions(inputLine) {
     let wireMoves = parseInput(inputLine);
-    let positions = [];
+    let positions = ['0,0'];
     let currentX = 0;
     let currentY = 0;
     for (let i in wireMoves) {
@@ -79,25 +81,25 @@ function calculateWirePositions(inputLine) {
             case 'U':
                 for (let y = 1; y <= value; y++) {
                     currentY++;
-                    positions.push([currentX, currentY]);
+                    positions.push(currentX + ',' + currentY);
                 }
                 break;
             case 'D':
                 for (let y = 1; y <= value; y++) {
                     currentY--;
-                    positions.push([currentX, currentY]);
+                    positions.push(currentX + ',' + currentY);
                 }
                 break;
             case 'R':
                 for (let x = 1; x <= value; x++) {
                     currentX++;
-                    positions.push([currentX, currentY]);
+                    positions.push(currentX + ',' + currentY);
                 }
                 break;
             case 'L':
                 for (let x = 1; x <= value; x++) {
                     currentX--;
-                    positions.push([currentX, currentY]);
+                    positions.push(currentX + ',' + currentY);
                 }
                 break;
         }
@@ -105,18 +107,11 @@ function calculateWirePositions(inputLine) {
     return positions;
 }
 
-function positionsIdentical(a, b) {
-    var i = a.length;
-    if (i != b.length) return false;
-    while (i--) {
-        if (a[i] !== b[i]) return false;
-    }
-    return true;
-}
-
 function countSteps(crossing, wirePositions) {
-    let steps = [];
-    for(let i = 0; i < wirePositions.length && !positionsIdentical(crossing, wirePositions[i]);i++){
-        
+    for (let i = 0; i < wirePositions.length; i++) {
+        if (crossing == wirePositions[i]) {
+            return i;
+        }
     }
+    return -1;
 }

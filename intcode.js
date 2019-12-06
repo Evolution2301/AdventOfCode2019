@@ -50,7 +50,7 @@ function handleOpcode(code, pos, input) {
             nextStepSize = 4;
             break;
         case 3:
-            opcode3(code, pos, input, parameterMode);
+            opcode3(code, pos, input);
             nextStepSize = 2;
             break;
         case 4:
@@ -104,7 +104,7 @@ function opcode2(code, pos, parameterMode) {
     debug("Op2", valParam1, valParam2, posParam3, code[posParam3]);
 }
 
-function opcode3(code, pos, input, parameterMode) {
+function opcode3(code, pos, input) {
     let param1 = code[pos + 1];
     code[param1] = Number(input);
     debug("Op3", param1, input, code[param1]);

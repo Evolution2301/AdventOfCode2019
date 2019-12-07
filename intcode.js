@@ -1,4 +1,5 @@
 let debugEnabled = false;
+let inputPos = 0;
 
 function debug() {
     if (debugEnabled) {
@@ -7,6 +8,7 @@ function debug() {
 }
 
 exports.handleIntCode = function (code, input = undefined) {
+    inputPos = 0;
     for (let i in code) {
         code[i] = Number(code[i]);
     }
@@ -106,7 +108,12 @@ function opcode2(code, pos, parameterMode) {
 
 function opcode3(code, pos, input) {
     let param1 = code[pos + 1];
-    code[param1] = Number(input);
+    if (input.constructor === Array) {
+        code[param1] = Number(input[inputPos]);
+        inputPos++;
+    } else {
+        code[param1] = Number(input);
+    }
     debug("Op3", param1, input, code[param1]);
 }
 
